@@ -77,7 +77,7 @@ function OpacityControl() {
     map.on('load', () => {
         map.addSource('radar', {
             'type': 'image',
-            'url': '/map xix.png',
+            'url': './map_xix.png',
             'coordinates': [
                 [21.17130757542776, 45.778422851406276],
                 [21.33160743990564, 45.778422851406276],
@@ -93,10 +93,6 @@ function OpacityControl() {
                 'raster-opacity': .9
             }
         });
-
-        map.setPaintProperty(
-            'raster-opacity', value - '0'
-        );
     });
 }
 
