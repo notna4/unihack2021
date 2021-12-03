@@ -1,11 +1,11 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicnViaWM0IiwiYSI6ImNrY3Vla3R1ZjF0YnYyeXQ2c243eWVpeHEifQ.Hgj0BjhuuOAowR_pE97V_Q';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/rubic4/ckrkrpr4h9k4l17nyyhrwfuc4',
+    style: 'mapbox://styles/rubic4/ckwql40zd202w15o358fdep6y',
     //center: [-122.486052, 37.830348],
     //center: [-75.789, 41.874],
     center: [21.226788, 45.75],
-    
+    maxZoom: 17,
     zoom: 12,
 });
 
@@ -88,10 +88,24 @@ function OpacityControl() {
         map.addLayer({
             id: 'radar-layer',
             'type': 'raster',
-            'source': 'radar',
+            'source': 'radar'/*
             'paint' : {
-                'raster-opacity': .9
-            }
+                'raster-opacity': document.getElementById("slider").value - '0'
+            } */
+        });
+
+        const slider = document.getElementById('slider');
+
+        slider.addEventListener('input', (e) => {
+            // Adjust the layers opacity. layer here is arbitrary - this could
+            // be another layer name found in your style or a custom layer
+            // added on the fly using `addSource`.
+            map.setPaintProperty(
+                'radar-layer',
+                'raster-opacity',
+                e.target.value - '0'
+            );
+
         });
     });
 }
