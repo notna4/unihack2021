@@ -1,7 +1,12 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicnViaWM0IiwiYSI6ImNrY3Vla3R1ZjF0YnYyeXQ2c243eWVpeHEifQ.Hgj0BjhuuOAowR_pE97V_Q';
+
+const satStyle = 'mapbox://styles/rubic4/ckwql40zd202w15o358fdep6y';
+const darkStyle = 'mapbox://styles/rubic4/ckrkr81ox0l1x17o1i8jsfmnu';
+const lightStyle = 'mapbox://styles/rubic4/ckrkrcp3q9jrp17nyfgo2gzto';
+
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/rubic4/ckwql40zd202w15o358fdep6y',
+    style: lightStyle,
     //center: [-122.486052, 37.830348],
     //center: [-75.789, 41.874],
     center: [21.226788, 45.75],
@@ -110,3 +115,149 @@ function OpacityControl() {
     });
 }
 
+document.getElementById('dark').onclick = function(){
+    //map.remove();
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: darkStyle,
+        //center: [-122.486052, 37.830348],
+        //center: [-75.789, 41.874],
+        center: [21.226788, 45.75],
+        maxZoom: 17,
+        zoom: 12,
+    });
+
+    map.on('load', () => {
+        map.addSource('radar', {
+            'type': 'image',
+            'url': './map_xix.png',
+            'coordinates': [
+                [21.17130757542776, 45.778422851406276],
+                [21.33160743990564, 45.778422851406276],
+                [21.333009123221416, 45.72006181346862],
+                [21.17105899121748, 45.72087324476604],
+            ]
+        });
+        map.addLayer({
+            id: 'radar-layer',
+            'type': 'raster',
+            'source': 'radar'/*
+            'paint' : {
+                'raster-opacity': document.getElementById("slider").value - '0'
+            } */
+        });
+
+        const slider = document.getElementById('slider');
+
+        slider.addEventListener('input', (e) => {
+            // Adjust the layers opacity. layer here is arbitrary - this could
+            // be another layer name found in your style or a custom layer
+            // added on the fly using `addSource`.
+            map.setPaintProperty(
+                'radar-layer',
+                'raster-opacity',
+                e.target.value - '0'
+            );
+
+        });
+    });
+
+};
+
+document.getElementById('light').onclick = function(){
+    //map.remove();
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: lightStyle,
+        //center: [-122.486052, 37.830348],
+        //center: [-75.789, 41.874],
+        center: [21.226788, 45.75],
+        maxZoom: 17,
+        zoom: 12,
+    });
+
+    map.on('load', () => {
+        map.addSource('radar', {
+            'type': 'image',
+            'url': './map_xix.png',
+            'coordinates': [
+                [21.17130757542776, 45.778422851406276],
+                [21.33160743990564, 45.778422851406276],
+                [21.333009123221416, 45.72006181346862],
+                [21.17105899121748, 45.72087324476604],
+            ]
+        });
+        map.addLayer({
+            id: 'radar-layer',
+            'type': 'raster',
+            'source': 'radar'/*
+            'paint' : {
+                'raster-opacity': document.getElementById("slider").value - '0'
+            } */
+        });
+
+        const slider = document.getElementById('slider');
+
+        slider.addEventListener('input', (e) => {
+            // Adjust the layers opacity. layer here is arbitrary - this could
+            // be another layer name found in your style or a custom layer
+            // added on the fly using `addSource`.
+            map.setPaintProperty(
+                'radar-layer',
+                'raster-opacity',
+                e.target.value - '0'
+            );
+
+        });
+    });
+        
+};
+
+document.getElementById('sat').onclick = function(){
+    //map.remove();
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: satStyle,
+        //center: [-122.486052, 37.830348],
+        //center: [-75.789, 41.874],
+        center: [21.226788, 45.75],
+        maxZoom: 17,
+        zoom: 12,
+    });
+
+    map.on('load', () => {
+        map.addSource('radar', {
+            'type': 'image',
+            'url': './map_xix.png',
+            'coordinates': [
+                [21.17130757542776, 45.778422851406276],
+                [21.33160743990564, 45.778422851406276],
+                [21.333009123221416, 45.72006181346862],
+                [21.17105899121748, 45.72087324476604],
+            ]
+        });
+        map.addLayer({
+            id: 'radar-layer',
+            'type': 'raster',
+            'source': 'radar'/*
+            'paint' : {
+                'raster-opacity': document.getElementById("slider").value - '0'
+            } */
+        });
+
+        const slider = document.getElementById('slider');
+
+        slider.addEventListener('input', (e) => {
+            // Adjust the layers opacity. layer here is arbitrary - this could
+            // be another layer name found in your style or a custom layer
+            // added on the fly using `addSource`.
+            map.setPaintProperty(
+                'radar-layer',
+                'raster-opacity',
+                e.target.value - '0'
+            );
+
+        });
+    });
+        
+};
