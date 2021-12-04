@@ -37,12 +37,16 @@ body {
   width: fit-content;
   height: fit-content;
   border-radius: 15px;
-  cursor: pointer;
   -webkit-box-shadow: 0px 0px 43px -15px #000000;
   box-shadow: 0px 0px 43px -15px #000000;
   padding: 8px;
   color: rgb(19, 255, 216);
   font-weight: bold;
+  transition: all 0.2s ease-in;
+}
+
+.marker:hover {
+  background-color: rgb(59, 59, 59);
 }
 
 #left {
@@ -51,7 +55,6 @@ body {
   z-index: 100;
   bottom: 0;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-content: center;
   margin-bottom: 20px;
@@ -59,6 +62,7 @@ body {
   font-weight: bold;
   text-align: center;
   gap: 10px;
+  margin: 10px;
 }
 
 #tag {
@@ -67,6 +71,13 @@ body {
   color: white;
   text-align: center;
   align-self: center;
+  user-select: none;
+}
+
+#theSlider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #map-select {
@@ -81,8 +92,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
-  padding: 10px;
+  border-radius: 22px;
+  padding: 15px;
   gap: 10px;
 }
 
@@ -92,26 +103,31 @@ body {
   gap: 10px;
 }
 
+
+
 #showPlaces {
-  color: white;
+  z-index: 1;
+  margin: 20px;
+  width: 100px;
   font-family: "Inter", sans-serif;
   font-weight: bold;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.37);
-  border-radius: 20px;
-  transition: .2s all;
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(15px);
+  padding: 15px;
+  border-radius: 22px;
+  color: white;
+  background-color: rgba(37, 37, 37, 0.712);
+  transition: .4s all;
 }
 
 #showPlaces:hover {
   cursor: pointer;
+  background-color: rgba(0, 5, 26, 0.692);
   -webkit-box-shadow: 0px 0px 43px -15px #000000;
   box-shadow: 0px 0px 43px -15px #000000;
-  background-color: rgba(17, 0, 56, 0.466);
 }
+
+
+
 
 input {
   cursor: pointer;
@@ -124,7 +140,7 @@ input {
     height: max-content;
     -webkit-appearance: none;
     border-radius: 22px;
-    background-color: rgba(0, 0, 0, 0.452);
+    background-color: rgba(37, 37, 37, 0.637);
     backdrop-filter: blur(15px);
     
   }
@@ -135,8 +151,8 @@ input {
     -webkit-appearance: none;
     height: 50px;
     cursor: ew-resize;
-    background: #434343;
-    box-shadow: -80px 0 0 80px #434343;
+    background: rgba(0, 5, 26, 0.692);
+    box-shadow: -80px 0 0 80px rgba(0, 5, 26, 0.692);
     border-radius: 100%;
   }
 }
@@ -204,4 +220,12 @@ input[type="range"]::-ms-fill-upper {
   cursor: pointer;
   height: 210px;
   width: 210px;
+}
+
+#marker:hover {
+  cursor: pointer;
+  width: 300px;
+  height: 300px;
+  background-image: url('./Places/GaraDeNord/gara1.png');
+  background-size: auto 100%;
 }

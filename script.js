@@ -30,11 +30,12 @@ map.on('style.load', function() {
     console.log("AICI 2 " + linkNearbyTheatres);
     $.getJSON(linkNearbyTheatres, function(data) {
         // JSON result in `data` variable
-        console.log(data);
-        /*   new mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(data.display_name)
-        .addTo(map);  */
+        //console.log(data);
+        /*
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML('<img src="./Places/GaraDeNord/gara1.png">')
+            .addTo(map);  */
         //displayMarkers(data);
     });
 
@@ -143,12 +144,12 @@ document.getElementById("showPlaces").onclick = function() {
 
     var div = document.getElementById('showPlaces');
     
-    if(div.textContent == "Show Places") {
-        div.textContent = "Don't Show Places";
+    if(div.textContent == "Explore") {
+        div.textContent = "Back";
         displayPlaces();
     }
     else {
-        div.textContent = "Show Places";
+        div.textContent = "Explore";
         stopDisplayPlaces();
     }
     /*
