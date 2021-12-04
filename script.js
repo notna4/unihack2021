@@ -18,16 +18,16 @@ var map = new mapboxgl.Map({
 map.on('style.load', function() {
     map.on('click', function(e) {
     let coordinates = e.lngLat;
-    console.log(coordinates);
+    //console.log(coordinates);
     let theLat = coordinates.lat;
     let theLon = coordinates.lng;
     let linkToNames = "https://nominatim.openstreetmap.org/reverse.php?lat=" + theLat + "&" + "lon=" + theLon + "&format=jsonv2";
-    console.log("AICI " + linkToNames);
+    //console.log("AICI " + linkToNames);
     //LAAT = theLat;
     //LOON = theLon;
 
     let linkNearbyTheatres = "https://overpass-api.de/api/interpreter?&data=[out:json];(node[%22amenity%22](around:1000," + theLat + "," + theLon + "););out%2050;";
-    console.log("AICI 2 " + linkNearbyTheatres);
+    //console.log("AICI 2 " + linkNearbyTheatres);
     $.getJSON(linkNearbyTheatres, function(data) {
         // JSON result in `data` variable
         //console.log(data);
@@ -64,14 +64,17 @@ const Places = {
         },
     ]
 }
-console.log(Places);
+//console.log(Places);
 function displayPlaces() {
     let len = Places.places.length;
 
     for(let i = 0; i < len; i++) {
         const el = document.createElement('div');
         el.className = 'marker';
+        el.id = 'mark' + i;
         el.textContent = Places.places[i].name;
+
+        el.onclick = function(){images(i)}
 
         //mapboxgl.Marker(el).setLngLat()
         // make a marker for each feature and add to the map
@@ -79,8 +82,38 @@ function displayPlaces() {
     }
 }
 
+function images(pos) {
+    console.log(pos);
+    var div = document.createElement('div');
+    div.id = 'places';
+    document.body.appendChild(div);
+
+    //make close button
+    let close = document.createElement('div');
+    close.onclick = function() {
+        div.remove();
+    }
+    close.id = 'close';
+    close.textContent = 'Close';
+
+    div.appendChild(close);
+
+    let len = Places.places[pos].photos.length;
+    console.log("LEN " + len);
+
+    for(let j = 0 ; j < len; j++) {
+        var place = document.createElement('div');
+        place.id = 'thePlace';
+
+        place.style.backgroundImage = "url('" + Places.places[pos].photos[j] + "')";
+        
+
+        div.appendChild(place);
+    }
+}
+
 function displayMarkers(data) {
-    console.log(data.elements);
+    //console.log(data.elements);
     let len = data.elements.length;
 
     for (let feature = 0; feature < len; feature++) {
@@ -186,3 +219,6 @@ function stopDisplayPlaces() {
        places[0].remove();
    }
 }
+
+
+
