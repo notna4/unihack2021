@@ -228,10 +228,6 @@ input[type="range"]::-ms-fill-upper {
 #place:hover {
   width: 5000px;
 }
-
-::-webkit-scrollbar {
-  width: 0px;
-}
  
 #thePlace {
   z-index: 2;
