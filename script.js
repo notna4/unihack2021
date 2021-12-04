@@ -10,7 +10,8 @@ var map = new mapboxgl.Map({
     //center: [-122.486052, 37.830348],
     //center: [-75.789, 41.874],
     center: [21.226788, 45.75],
-    maxZoom: 17,
+    minZoom: 11,
+    maxZoom: 15,
     zoom: 12,
 });
 
@@ -20,13 +21,13 @@ map.on('style.load', function() {
     console.log(coordinates);
     let theLat = coordinates.lat;
     let theLon = coordinates.lng;
-    //let linkToNames = "https://nominatim.openstreetmap.org/reverse.php?lat=" + theLat + "&" + "lon=" + theLon + "&format=jsonv2";
-    // console.log(linkToNames);
+    let linkToNames = "https://nominatim.openstreetmap.org/reverse.php?lat=" + theLat + "&" + "lon=" + theLon + "&format=jsonv2";
+    console.log("AICI " + linkToNames);
     //LAAT = theLat;
     //LOON = theLon;
 
-    let linkNearbyTheatres = "https://overpass-api.de/api/interpreter?&data=[out:json];(node[%22amenity%22=%22theatre%22](around:1000," + theLat + "," + theLon + "););out%2050;%3E;";
-
+    let linkNearbyTheatres = "https://overpass-api.de/api/interpreter?&data=[out:json];(node[%22amenity%22](around:1000," + theLat + "," + theLon + "););out%2050;";
+    console.log("AICI 2 " + linkNearbyTheatres);
     $.getJSON(linkNearbyTheatres, function(data) {
         // JSON result in `data` variable
         console.log(data);
@@ -34,7 +35,7 @@ map.on('style.load', function() {
         .setLngLat(coordinates)
         .setHTML(data.display_name)
         .addTo(map);  */
-        displayMarkers(data);
+        //displayMarkers(data);
     });
 
     
@@ -42,27 +43,50 @@ map.on('style.load', function() {
     });
 });
 
+
+
+const Places = {
+    'places': [
+        {
+            'name': 'Gara de Nord',
+            'coord': [45.75079435, 21.206330433175708],
+            'photos': [
+                './Places/GaraDeNord/gara1.png',
+                './Places/GaraDeNord/gara2.jpg',
+                './Places/GaraDeNord/gara3.jpg',
+                './Places/GaraDeNord/gara4.jpg'
+            ]
+        },
+        {
+            'name': 'Monumentul Fidelității',
+            'coord': [45.7558024, 21.22722421173622],
+        },
+    ]
+}
+console.log(Places);
+function displayPlaces() {
+    let len = Places.places.length;
+
+    for(let i = 0; i < len; i++) {
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.textContent = Places.places[i].name;
+
+        //mapboxgl.Marker(el).setLngLat()
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el).setLngLat([Places.places[i].coord[1], Places.places[i].coord[0]]).addTo(map);
+    }
+}
+
 function displayMarkers(data) {
     console.log(data.elements);
     let len = data.elements.length;
-
-    // get the HTML element for displaying the data found
-    const dis = document.getElementById('left');
-    // display how many places have been found
-    if(len > 1) {
-        dis.textContent = len + " places have been found.";
-    }
-    else if(len == 1) {
-        dis.textContent = len + " place has been found.";
-    }
-    else {
-        dis.textContent = "No places have been found.";
-    }
 
     for (let feature = 0; feature < len; feature++) {
         // create a HTML element for each feature
         const el = document.createElement('div');
         el.className = 'marker';
+        el.textContent = data.elements[feature].tags.amenity;
 
         //mapboxgl.Marker(el).setLngLat()
         // make a marker for each feature and add to the map
@@ -78,7 +102,7 @@ document.getElementById("slider").oninput = function() {
 
 function OpacityControl() {
     let value = document.getElementById("slider").value;
-    console.log(value - '0');
+    //console.log(value - '0');
     map.on('load', () => {
         map.addSource('radar', {
             'type': 'image',
@@ -262,3 +286,49 @@ document.getElementById('sat').onclick = function(){
         
 };
 
+document.getElementById("showPlaces").onclick = function() {
+
+    var div = document.getElementById('showPlaces');
+    
+    if(div.textContent == "Show Places") {
+        div.textContent = "Don't Show Places";
+        displayPlaces();
+    }
+    else {
+        div.textContent = "Show Places";
+        stopDisplayPlaces();
+    }
+    /*
+    var div = document.createElement('div');
+    div.id = 'places';
+    document.body.appendChild(div);
+
+    let len = Places.places.length;
+
+
+    for(let i = 0; i < len; i++) {
+        let lenn = Places.places[i].photos.length;
+        console.log(lenn);
+
+        for(let j = 0 ; j < lenn; j++) {
+            var place = document.createElement('div');
+            place.id = 'thePlace';
+
+            place.style.backgroundImage = "url('" + Places.places[i].photos[j] + "')";
+            
+
+            div.appendChild(place);
+        }
+    }   
+    */
+}
+
+function stopDisplayPlaces() {
+   var places = document.getElementsByClassName('marker mapboxgl-marker mapboxgl-marker-anchor-center');
+   //console.log(places.length);
+    let len = places.length;
+
+   while(len) {
+       places[0].remove();
+   }
+}
