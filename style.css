@@ -49,16 +49,25 @@ body {
   justify-content: center;
   align-content: center;
   margin-bottom: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+#tag {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  align-self: center;
 }
 
 #map-select {
-  width: max-content;
-  height: max-content;
-  background-color: rgba(0, 0, 255, 0.13);
-  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.452);
+  backdrop-filter: blur(15px);
   z-index: 1;
   position: fixed;
-  right: 0;
+  left: 0;
   top: 0;
   margin: 30px;
   display: flex;
@@ -72,8 +81,8 @@ body {
 #dark {
   background-image: url("darkModeicon.PNG");
   background-repeat: no-repeat;
-  height: 60px;
-  width: 60px;
+  min-height: 60px;
+  min-width: 60px;
   border-radius: 10px;
   transition: 0.2s all;
 }
@@ -87,8 +96,8 @@ body {
 #light {
   background-image: url("lightModeIcon.PNG");
   background-repeat: no-repeat;
-  height: 60px;
-  width: 60px;
+  min-height: 60px;
+  min-width: 60px;
   border-radius: 10px;
   transition: 0.2s all;
 }
@@ -102,8 +111,8 @@ body {
 #sat {
   background-image: url("satModeIcon.PNG");
   background-repeat: no-repeat;
-  height: 60px;
-  width: 60px;
+  min-height: 60px;
+  min-width: 60px;
   border-radius: 10px;
   transition: 0.2s all;
 }
@@ -124,9 +133,9 @@ input {
     width: 200px;
     height: max-content;
     -webkit-appearance: none;
-    background-color: #9a905d59;
     border-radius: 22px;
-    backdrop-filter: blur(20px);
+    background-color: rgba(0, 0, 0, 0.452);
+    backdrop-filter: blur(15px);
     
   }
 }
@@ -154,4 +163,13 @@ input[type="range"]::-ms-fill-lower {
 }
 input[type="range"]::-ms-fill-upper {
   background-color: #9a905d;
+}
+
+
+#nav {
+  z-index: 1;
+  top: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  color: white;
 }
