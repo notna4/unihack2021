@@ -51,12 +51,14 @@ body {
   z-index: 100;
   bottom: 0;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-content: center;
   margin-bottom: 20px;
   font-family: "Inter", sans-serif;
   font-weight: bold;
   text-align: center;
+  gap: 10px;
 }
 
 #tag {
@@ -96,11 +98,12 @@ body {
   font-weight: bold;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.37);
-  border-radius: 10px;
+  border-radius: 20px;
   transition: .2s all;
-  width: 90%;
+  width: fit-content;
   display: flex;
   justify-content: center;
+  backdrop-filter: blur(20px);
 }
 
 #showPlaces:hover {
@@ -108,50 +111,6 @@ body {
   -webkit-box-shadow: 0px 0px 43px -15px #000000;
   box-shadow: 0px 0px 43px -15px #000000;
   background-color: rgba(17, 0, 56, 0.466);
-}
-#dark {
-  background-image: url("darkModeicon.PNG");
-  background-repeat: no-repeat;
-  min-height: 60px;
-  min-width: 60px;
-  border-radius: 10px;
-  transition: 0.2s all;
-}
-
-#dark:hover {
-  -webkit-box-shadow: 0px 0px 43px -15px #000000;
-  box-shadow: 0px 0px 43px -15px #000000;
-  cursor: pointer;
-}
-
-#light {
-  background-image: url("lightModeIcon.PNG");
-  background-repeat: no-repeat;
-  min-height: 60px;
-  min-width: 60px;
-  border-radius: 10px;
-  transition: 0.2s all;
-}
-
-#light:hover {
-  -webkit-box-shadow: 0px 0px 43px -15px #000000;
-  box-shadow: 0px 0px 43px -15px #000000;
-  cursor: pointer;
-}
-
-#sat {
-  background-image: url("satModeIcon.PNG");
-  background-repeat: no-repeat;
-  min-height: 60px;
-  min-width: 60px;
-  border-radius: 10px;
-  transition: 0.2s all;
-}
-
-#sat:hover {
-  -webkit-box-shadow: 0px 0px 43px -15px #000000;
-  box-shadow: 0px 0px 43px -15px #000000;
-  cursor: pointer;
 }
 
 input {
